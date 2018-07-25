@@ -1,0 +1,19 @@
+- name: Enable necessary repos
+  hosts: all
+  tasks:
+        - name: Enable rhel-7-server-insights-3-rpms
+        command: subscription-manager repos --enable=rhel-7-server-insights-3-rpms
+
+- name: Install the latest version of insights-client
+  hosts: all
+  tasks:
+        - name: Install the latest version of insights-client
+        yum:
+        name: insights-client
+        state: latest
+
+- name: Insights Client Registration
+  hosts: all
+  tasks:
+        - name: insights-client registration
+        command: /usr/bin/insights-client --register
